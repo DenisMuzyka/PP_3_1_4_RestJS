@@ -8,7 +8,6 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserDetailsServiceImpl;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,7 @@ import java.util.Set;
 public class HelloController {
 
     private final UserDetailsServiceImpl userDetailsService;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public HelloController(UserDetailsServiceImpl userDetailsService, PasswordEncoder passwordEncoder) {
@@ -41,7 +40,7 @@ public class HelloController {
             anyRole.add(user);
             userDetailsService.addUser(new User
                     ("admin",
-                    passwordEncoder.encode("admin"),
+                            passwordEncoder.encode("admin"),
                             "Admin", (byte) 30, "admin30@gmail.com", adminRole));
             userDetailsService.addUser(new User
                     ("user",

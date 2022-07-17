@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class RoleServiceImpl implements RoleService{
 
-    private RoleRepo roleRepo;
+    private final RoleRepo roleRepo;
 
     @Autowired
     public RoleServiceImpl(RoleRepo roleRepo) {

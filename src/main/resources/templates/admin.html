@@ -56,15 +56,17 @@
     <br/>
     <th:block th:each="role:${roles}">
         <lable th:text="${role.getRole()}"></lable>
-        <input type="checkbox" th:field="${user.roles}" th:value="${role.getId()}"/>
+        <label>
+            <input type="checkbox" th:field="${user.roles}" th:value="${role.getId()}"/>
+        </label>
     </th:block>
     <br/>
     <br/>
     <input type="submit" value="Add User"/>
 </form>
 
-<h1><a th:href="@{/user}">Обо мне</a></h1>
-<h1><a th:href="@{/logout}">Выйти</a></h1>
+<h3><a th:href="@{/user}">Обо мне</a></h3>
+<h3><a th:href="@{/logout}">Выйти</a></h3>
 
 </body>
 </html>
