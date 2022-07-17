@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<h1>Users list</h1>
+<br/>
+<th:if test="${!empty users}">
+    <table border="1" cellspacing="0">
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>password</th>
+            <th>name</th>
+            <th>age</th>
+            <th>e-mail</th>
+            <th>role</th>
+            <th>action</th>
+        </tr>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.getId()}">id</td>
+            <td th:text="${user.getUsername()}">id</td>
+            <td th:text="${user.getPassword()}">id</td>
+            <td th:text="${user.getName()}">name</td>
+            <td th:text="${user.getAge()}">age</td>
+            <td th:text="${user.getEmail()}">e-mail</td>
+            <td th:text="${user.getRolesString()}">role</td>
+            <td>
+                <a th:href="@{/admin/users/edit/{id}(id=${user.getId()})}">Edit</a>
+                <a th:href="@{/admin/users/remove/{id}(id=${user.getId()})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</th:if>
+
+<h1>Add new User</h1>
+
+<form th:method="POST" th:action="@{/admin/users/add}" th:object="${user}">
+    <input type="text" th:field="*{username}" id="username"/>
+    <label for="username">Enter username</label>
+    <br/>
+    <input type="text" th:field="*{password}" id="password"/>
+    <label for="password">Enter password</label>
+    <br/>
+    <input type="text" th:field="*{name}" id="USER_NAME"/>
+    <label for="USER_NAME">Enter name</label>
+    <br/>
+    <input type="text" th:field="*{age}" id="USER_AGE"/>
+    <label for="USER_AGE">Enter age</label>
+    <br/>
+    <input type="text" th:field="*{email}" id="USER_EMAIL"/>
+    <label for="USER_EMAIL">Enter email</label>
+    <br/>
+    <th:block th:each="role:${roles}">
+        <lable th:text="${role.getRole()}"></lable>
+        <input type="checkbox" th:field="${user.roles}" th:value="${role.getId()}"/>
+    </th:block>
+    <br/>
+    <br/>
+    <input type="submit" value="Add User"/>
+</form>
+
+<h1><a th:href="@{/user}">Обо мне</a></h1>
+<h1><a th:href="@{/logout}">Выйти</a></h1>
+
+</body>
+</html>
