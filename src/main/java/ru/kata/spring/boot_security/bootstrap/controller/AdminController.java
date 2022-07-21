@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.controller;
+package ru.kata.spring.boot_security.bootstrap.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,16 +6,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.RoleService;
-import ru.kata.spring.boot_security.demo.service.UserDetailsServiceImpl;
+import ru.kata.spring.boot_security.bootstrap.model.Role;
+import ru.kata.spring.boot_security.bootstrap.model.User;
+import ru.kata.spring.boot_security.bootstrap.service.RoleService;
+import ru.kata.spring.boot_security.bootstrap.service.UserDetailsServiceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 
     private final UserDetailsServiceImpl userDetailServiceImpl;
@@ -29,43 +29,44 @@ public class AdminController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @GetMapping
-    public String getAllUsers(Model model) {
+    @GetMapping(value = "/admin")
+    public String openStartPage(Model model, Principal principal) {
+        List<User> users = userDetailServiceImpl.getAllUsers();
         List<Role> roles = roleService.findAllRoles();
+        User user = userDetailServiceImpl.findByEmail(principal.getName());
+        model.addAttribute("users", users);
+        model.addAttribute("meUser", user);
         model.addAttribute("roles", roles);
-        model.addAttribute("user", new User());
-        model.addAttribute("users", userDetailServiceImpl.getAllUsers());
-        return "admin";
+        return "/admin";
     }
 
-    @PostMapping("/users/add")
-    public String addUser(Model model) {
-        User user = new User();
+    @GetMapping("/admin/users/add")
+    public String addUser(Model model, Principal principal) {
         List<Role> roles = roleService.findAllRoles();
+        User user = userDetailServiceImpl.findByEmail(principal.getName());
         model.addAttribute("roles", roles);
         model.addAttribute("user", new User());
+        model.addAttribute("meUser", user);
+        return "addUser";
+    }
+
+    @PostMapping("/admin")
+    public String createUser(@ModelAttribute("user") User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDetailServiceImpl.addUser(user);
-
         return "redirect:/admin";
     }
 
-    @GetMapping("/users/remove/{id}")
+    @DeleteMapping("/admin/{id}")
     public String removeUser(@PathVariable("id") Long id) {
         userDetailServiceImpl.removeUser(id);
         return "redirect:/admin";
     }
 
-    @GetMapping("/users/edit/{id}")
-    public String editPage(@PathVariable("id") Long id, Model model) {
-        List<Role> roles = roleService.findAllRoles();
-        model.addAttribute("roles", roles);
-        model.addAttribute("user", userDetailServiceImpl.findUserById(id));
-        return "edit";
-    }
-    @PatchMapping("/users/{id}")
-    public String editUser (@ModelAttribute("user") User user) {
-        userDetailServiceImpl.updateUser(user);
+    @PatchMapping("/admin/edit/{id}")
+    public String editUser (@ModelAttribute("editUser") User user,Model model, @PathVariable("id") Long id) {
+        model.addAttribute("editUser", userDetailServiceImpl.findUserById(id));
+        userDetailServiceImpl.updateUser(user, id);
         return "redirect:/admin";
     }
 }

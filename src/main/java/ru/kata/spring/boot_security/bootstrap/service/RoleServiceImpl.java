@@ -1,10 +1,10 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.kata.spring.boot_security.bootstrap.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.kata.spring.boot_security.demo.dao.RoleRepo;
-import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.bootstrap.dao.RoleRepo;
+import ru.kata.spring.boot_security.bootstrap.model.Role;
 
 import java.util.List;
 

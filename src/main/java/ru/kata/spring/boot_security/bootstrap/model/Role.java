@@ -1,10 +1,12 @@
-package ru.kata.spring.boot_security.demo.model;
+package ru.kata.spring.boot_security.bootstrap.model;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
 
@@ -13,7 +15,10 @@ public class Role implements GrantedAuthority {
     private Long id;
     private String role;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
 
     public Long getId() {
@@ -52,6 +57,17 @@ public class Role implements GrantedAuthority {
         this.role = role;
         this.users = users;
     }
+
+    public String getRoleAsString() {
+        String s = "";
+        if (role.contains("ROLE_ADMIN")) {
+            s = "Amin";
+        } else if (role.contains("ROLE_USER")) {
+            s = "User";
+        }
+        return s;
+    }
+
 
     @Override
     public String getAuthority() {

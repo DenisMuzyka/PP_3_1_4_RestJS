@@ -1,13 +1,13 @@
-package ru.kata.spring.boot_security.demo;
+package ru.kata.spring.boot_security.bootstrap;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootSecurityDemoApplication {
+public class SpringBootSecurityBootstrapApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootSecurityDemoApplication.class, args);
+		SpringApplication.run(SpringBootSecurityBootstrapApp.class, args);
 	}
 
 }

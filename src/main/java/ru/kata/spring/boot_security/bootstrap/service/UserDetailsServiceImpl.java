@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.service;
+package ru.kata.spring.boot_security.bootstrap.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.dao.RoleRepo;
-import ru.kata.spring.boot_security.demo.dao.UserRepo;
-import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.bootstrap.dao.RoleRepo;
+import ru.kata.spring.boot_security.bootstrap.dao.UserRepo;
+import ru.kata.spring.boot_security.bootstrap.model.User;
 
 import java.util.List;
 
@@ -32,10 +32,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public void updateUser(User user) {
+    public void updateUser(User user, Long id) {
         userRepo.save(user);
     }
-
 
     @Transactional
     public void removeUser(Long id) {
@@ -53,13 +52,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public User findByUsername(String username) {
-        return userRepo.findByUsername(username);
+    public User findByEmail(String email) {
+        return userRepo.findByEmail(email);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepo.findByEmail(email);
         user.setRoles(roleRepo.findAllByUsersId(user.getId()));
         return user;
     }
