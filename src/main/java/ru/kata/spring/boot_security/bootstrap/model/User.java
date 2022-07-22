@@ -73,7 +73,7 @@ public class User implements UserDetails {
             } else if (role.getRole().contains("ROLE_USER")) {
                 sb.append("User");
             }
-            sb.append("; ");
+            sb.append(" ");
         }
         return sb.toString();
     }
