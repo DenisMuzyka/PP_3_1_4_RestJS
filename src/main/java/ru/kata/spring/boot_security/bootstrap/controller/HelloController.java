@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.kata.spring.boot_security.bootstrap.model.Role;
 import ru.kata.spring.boot_security.bootstrap.model.User;
-import ru.kata.spring.boot_security.bootstrap.service.UserDetailsServiceImpl;
+import ru.kata.spring.boot_security.bootstrap.service.UserServiceImpl;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,18 +17,18 @@ import java.util.Set;
 @Transactional
 public class HelloController {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserServiceImpl userService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public HelloController(UserDetailsServiceImpl userDetailsService, PasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
+    public HelloController(UserServiceImpl userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
     public String startPage() {
-        List<User> users = userDetailsService.getAllUsers();
+        List<User> users = userService.getAllUsers();
 
         if (users.isEmpty()) {
             Role admin = new Role("ROLE_ADMIN");
@@ -40,15 +40,15 @@ public class HelloController {
             userRole.add(user);
             anyRole.add(admin);
             anyRole.add(user);
-            userDetailsService.addUser(new User
+            userService.addUser(new User
                     ("admin","admin",30,"admin30@gmail.com","admin30@gmail.com", adminRole));
-            userDetailsService.addUser(new User
+            userService.addUser(new User
                     ("user","user",20,"user20@gmail.com","user20@gmail.com", userRole));
-            userDetailsService.addUser(new User
+            userService.addUser(new User
                     ("user2","user2",22,"user222@gmail.com","user222@gmail.com", userRole));
-            userDetailsService.addUser(new User
+            userService.addUser(new User
                     ("any","any",27,"any27@gmail.com","any27@gmail.com", anyRole));
-            userDetailsService.addUser(new User
+            userService.addUser(new User
                     ("any2","any2",30,"any230@gmail.com", "any230@gmail.com", anyRole));
         }
         return "redirect:/login";

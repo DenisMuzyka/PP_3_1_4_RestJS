@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.bootstrap.model.Role;
 import ru.kata.spring.boot_security.bootstrap.model.User;
 import ru.kata.spring.boot_security.bootstrap.service.RoleService;
-import ru.kata.spring.boot_security.bootstrap.service.UserDetailsServiceImpl;
+import ru.kata.spring.boot_security.bootstrap.service.UserServiceImpl;
 
 import java.security.Principal;
 import java.util.List;
@@ -18,12 +18,12 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-    private final UserDetailsServiceImpl userDetailServiceImpl;
+    private final UserServiceImpl userDetailServiceImpl;
     private final RoleService roleService;
     private PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public AdminController(UserDetailsServiceImpl userDetailServiceImpl, RoleService roleService, PasswordEncoder bCryptPasswordEncoder) {
+    public AdminController(UserServiceImpl userDetailServiceImpl, RoleService roleService, PasswordEncoder bCryptPasswordEncoder) {
         this.userDetailServiceImpl = userDetailServiceImpl;
         this.roleService = roleService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
