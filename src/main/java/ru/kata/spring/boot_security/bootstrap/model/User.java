@@ -19,9 +19,9 @@ public class User implements UserDetails {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "firstName")
+    @Column(name = "first_Name")
     private String firstName;
-    @Column(name = "lastName")
+    @Column(name = "last_Name")
     private String lastName;
     @Column(name = "age")
     private int age;
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set <Role> roles;
+    private Collection <Role> roles;
 
     public User() {
     }
@@ -46,7 +46,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, int age, String email, String password, Set<Role> roles) {
+    public User(String firstName, String lastName, int age, String email, String password, Collection<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
