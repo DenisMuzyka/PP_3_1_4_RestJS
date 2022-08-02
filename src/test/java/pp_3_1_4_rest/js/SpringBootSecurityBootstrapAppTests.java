@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.bootstrap;
+package pp_3_1_4_rest.js;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

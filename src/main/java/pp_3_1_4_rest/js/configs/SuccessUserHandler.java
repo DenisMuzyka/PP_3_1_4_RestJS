@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.bootstrap.configs;
+package pp_3_1_4_rest.js.configs;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

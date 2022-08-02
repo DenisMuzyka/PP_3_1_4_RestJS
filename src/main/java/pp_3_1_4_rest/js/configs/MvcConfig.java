@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.bootstrap.configs;
+package pp_3_1_4_rest.js.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

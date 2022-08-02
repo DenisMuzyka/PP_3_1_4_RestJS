@@ -1,12 +1,12 @@
-package ru.kata.spring.boot_security.bootstrap.service;
+package pp_3_1_4_rest.js.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.bootstrap.dao.UserRepo;
-import ru.kata.spring.boot_security.bootstrap.model.User;
+import pp_3_1_4_rest.js.dao.UserRepo;
+import pp_3_1_4_rest.js.model.User;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ public class UserServiceImpl {
         this.userRepo = userRepo;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-
     @Transactional
     public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

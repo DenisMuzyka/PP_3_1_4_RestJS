@@ -1,7 +1,7 @@
-package ru.kata.spring.boot_security.bootstrap.dao;
+package pp_3_1_4_rest.js.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.kata.spring.boot_security.bootstrap.model.Role;
+import pp_3_1_4_rest.js.model.Role;
 
 import java.util.Collection;
 

@@ -1,13 +1,13 @@
-package ru.kata.spring.boot_security.bootstrap;
+package pp_3_1_4_rest.js;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootSecurityBootstrapApp {
+public class SpringBootSecurityBootstrapRestJSApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootSecurityBootstrapApp.class, args);
+		SpringApplication.run(SpringBootSecurityBootstrapRestJSApp.class, args);
 	}
 
 }

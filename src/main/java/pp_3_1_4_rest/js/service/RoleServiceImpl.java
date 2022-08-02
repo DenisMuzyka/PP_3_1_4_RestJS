@@ -1,11 +1,12 @@
-package ru.kata.spring.boot_security.bootstrap.service;
+package pp_3_1_4_rest.js.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.kata.spring.boot_security.bootstrap.dao.RoleRepo;
-import ru.kata.spring.boot_security.bootstrap.model.Role;
+import pp_3_1_4_rest.js.dao.RoleRepo;
+import pp_3_1_4_rest.js.model.Role;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -31,5 +32,17 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public List<Role> findAllRoles() {
         return roleRepo.findAll(Sort.by(Sort.Direction.ASC,"role"));
+    }
+
+    @Override
+    public void saveRole(Role role) {
+        roleRepo.save(role);
+    }
+
+    @Override
+    public void saveAllRoles(Collection<Role> roles) {
+        for (Role role: roles) {
+            roleRepo.save(role);
+        }
     }
 }
