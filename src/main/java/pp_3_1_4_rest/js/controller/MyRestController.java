@@ -42,5 +42,11 @@ public class MyRestController {
         userService.updateUser(user, id);
         return user;
     }
+
+    @DeleteMapping("/users/{id}")
+    public String deleteUser(@PathVariable long id) {
+        userService.removeUser(id);
+        return "User with ID = " + id + " was deleted";
+    }
 }
 

@@ -2,7 +2,6 @@ package pp_3_1_4_rest.js.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +10,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
-
 @Table(name = "users")
 public class User implements UserDetails {
     public long getId() {
