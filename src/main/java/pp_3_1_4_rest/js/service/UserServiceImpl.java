@@ -29,10 +29,10 @@ public class UserServiceImpl {
     }
 
     @Transactional
-    public void updateUser(User user, Long id) {
+    public void updateUser(User user) {
         if (user.getPassword() == null ||
-                user.getPassword().equals("") || user.getPassword().equals(findUserById(id).getPassword())) {
-            user.setPassword(findUserById(id).getPassword());
+                user.getPassword().equals("") || user.getPassword().equals(findUserById(user.getId()).getPassword())) {
+            user.setPassword(findUserById(user.getId()).getPassword());
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }

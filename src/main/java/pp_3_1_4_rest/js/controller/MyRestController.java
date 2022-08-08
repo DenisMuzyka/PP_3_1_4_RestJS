@@ -2,10 +2,12 @@ package pp_3_1_4_rest.js.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pp_3_1_4_rest.js.model.Role;
 import pp_3_1_4_rest.js.model.User;
 import pp_3_1_4_rest.js.service.RoleServiceImpl;
 import pp_3_1_4_rest.js.service.UserServiceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -26,9 +28,14 @@ public class MyRestController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/users/{id}")
-    public User getUser(@PathVariable long id) {
-        return userService.findUserById(id);
+    @GetMapping("/roles")
+    public List<Role> getAllRoles(){
+        return roleService.findAllRoles();
+    }
+
+    @GetMapping("/userinfo")
+    public User getUser(Principal principal) {
+        return userService.findByEmail(principal.getName());
     }
 
     @PostMapping("/users")
@@ -37,9 +44,9 @@ public class MyRestController {
         return user;
     }
 
-    @PutMapping("/users/{id}")
-    public User updateUser(@RequestBody User user, @PathVariable long id) {
-        userService.updateUser(user, id);
+    @PutMapping("/users/edituser")
+    public User updateUser(@RequestBody User user) {
+        userService.updateUser(user);
         return user;
     }
 
