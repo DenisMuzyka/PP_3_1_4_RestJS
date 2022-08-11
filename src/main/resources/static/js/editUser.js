@@ -1,4 +1,4 @@
-const editUserLink = "http://localhost:8080/api/users/edituser"
+const editUserLink = "http://localhost:8080/api/users"
 // Функция для редактирования юзера
 function editUser(id) {
     // Собираем отменченные роли, формируем на их основе объект и помещаем объекты в массив

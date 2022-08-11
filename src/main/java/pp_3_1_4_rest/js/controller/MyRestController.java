@@ -44,7 +44,7 @@ public class MyRestController {
         return user;
     }
 
-    @PutMapping("/users/edituser")
+    @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return user;
